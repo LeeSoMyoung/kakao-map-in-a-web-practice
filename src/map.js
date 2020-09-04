@@ -1,9 +1,16 @@
 const container = document.getElementById('map');
+
+const chatting_icon='https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/chatting.png?alt=media&token=dc5b6620-ab4d-4ab1-b580-3c058d391270';
+const currentLocation_icon='https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/current_location.png?alt=media&token=5a6b46d7-9506-440a-bf98-529b0d16df25';
+const history_icon='https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/history.png?alt=media&token=1a235c6b-42bd-4dd8-b298-93e466100849';
+
+console.log('초기 위치 가대 성심교정');
+
 var options = {
 		center: new kakao.maps.LatLng(37.485902,126.804372),
 		level: 3
 };
-let map = new kakao.maps.Map(container, options);
+var map = new kakao.maps.Map(container, options);
 var positions=[
         {
             title:'가톨릭대',
@@ -38,7 +45,8 @@ if(navigator.geolocation){
 
     });
 }else{
-    console.log('geolocation을 사용할 수 없습니다.');
+    alert('현 위치를 불러올 수 없습니다.');
+    consolelog('unable to use geolocation');
 }
 
 function displayMarker(locPosition, message) {
