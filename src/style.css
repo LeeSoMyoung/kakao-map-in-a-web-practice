@@ -1,17 +1,53 @@
-.currentLocation{
-    width: 50px;
-    height:50px;
-    background:white;
-    display:flex;
-    align-items:cneter;
-    justify-content: center;
-    text-decoration:none;
-    border-radius:50%;
-    color:#ffffff;
-    font-size: 30px;
-    box-shadow:2px 2px 5px rgba(0,0,0,0.25);
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index: 1;
+#map{
+    position:relative;
+    overflow:hidden;
 }
+.buttons, .buttons *{
+    margin:0;
+    padding:0;
+    color:#000;}   
+.buttons{
+    position:absolute;
+    overflow:hidden;
+    top:10px;
+    left:10px;
+    width:150px;
+    height:50px;
+    z-index:10;
+    border:1px solid black;
+    font-family:'Malgun Gothic','맑은 고딕',sans-serif;
+    font-size:12px;
+    text-align:center;
+    background-color:#fff;
+}
+.buttons li{
+    list-style:none;
+    float:left;
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    padding-top:5px;
+    cursor:pointer;} 
+.buttons .history {
+    display:block;
+    margin:0 auto 2px;
+    width:22px;
+    height:26px;
+    background:url('https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/history.png?alt=media&token=b1fd40b1-405d-44a1-bde3-3bf257c39bc2');
+} 
+.buttons .currentLocation {
+    display:block;
+    margin:0 auto 2px;
+    width:22px;
+    height:26px;
+    background:url('https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/current_location.png?alt=media&token=5a6b46d7-9506-440a-bf98-529b0d16df25');
+    background-position:-10px 0;
+}  
+.buttons .chatting {
+    display:block;
+    margin:0 auto 2px;
+    width:22px;
+    height:26px;
+    background:url('https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/chatting.png?alt=media&token=fb136268-3732-4f7c-806a-e2a518beeb53');
+    background-position:-10px -36px;
+}   

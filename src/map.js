@@ -28,26 +28,28 @@ for(var i=0;i<positions.length;++i){
     displayMarker(positions[i].latlng,message);
 }
 
+getCurrentLocation();
 
-///////////// 현위치 불러오기↓
-if(navigator.geolocation){
-    console.log('geolocation 사용 가능');
+function getCurrentLocation(){
+    if(navigator.geolocation){
+        console.log('geolocation 사용 가능');
 
-    navigator.geolocation.getCurrentPosition(function(position){
-        var lat=position.coords.latitude;
-        var lon=position.coords.longitude;
+        navigator.geolocation.getCurrentPosition(function(position){
+            var lat=position.coords.latitude;
+            var lon=position.coords.longitude;
 
-        var locPosition=new kakao.maps.LatLng(lat,lon);
-        var message = `<div style="padding:5px;">현 위치</div>`;
-        
-        console.log('현위치 ',locPosition);
-        displayMarker(locPosition,message);
+            var locPosition=new kakao.maps.LatLng(lat,lon);
+            var message = `<div style="padding:5px;">현 위치</div>`;
+            
+            console.log('현위치 ',locPosition);
+            displayMarker(locPosition,message);
 
 
-    });
-}else{
-    alert('현 위치를 불러올 수 없습니다.');
-    consolelog('unable to use geolocation');
+        });
+    }else{
+        alert('현 위치를 불러올 수 없습니다.');
+        consolelog('unable to use geolocation');
+    }
 }
 
 function displayMarker(locPosition, message) {
@@ -66,6 +68,8 @@ function displayMarker(locPosition, message) {
     map.setCenter(locPosition);      
 }
 
+///////////////////////
+
 // 행정동 주소 정보 가져오기
 function searchAddrFromCoords(coords,callback){
     geocoder.coord2RegionCode(coords.getLng(),coords.getLat(),callback);
@@ -74,4 +78,19 @@ function searchAddrFromCoords(coords,callback){
 // 법정동 상세 주소 정보 요청
 function searchDetailAddrFromCoords(coords,callback){
     geocoder.coord2RegionCode(coords.getLng(),coords.getLat(),callback);
+}
+
+/////////////////
+
+function createButtonImage(src,size,options){
+    var markerImage=new kakao.maps.marker(src,size,options);
+    return markerImage;
+}
+
+function goHistoryPage(){
+    //TODO : 히스토리 페이지로 가도록 만듦
+}
+
+function goChattingPage(){
+    //TODO : 채팅목록으로 이동
 }
