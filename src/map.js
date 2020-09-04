@@ -1,4 +1,5 @@
 const container = document.getElementById('map');
+const geocoder=kakao.maps.services.Geocoder();
 
 const chatting_icon='https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/chatting.png?alt=media&token=fb136268-3732-4f7c-806a-e2a518beeb53';
 const currentLocation_icon='https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/current_location.png?alt=media&token=5a6b46d7-9506-440a-bf98-529b0d16df25';
@@ -23,8 +24,7 @@ for(var i=0;i<positions.length;++i){
         position:positions[i].latlng,
         title:positions[i].title
     });
-    const message=`나무를 찾는 대학
-    가톨릭대`;
+    const message=`<div class="overlaybox">나무를 찾는 대학 가톨릭대학교</div>`;
     displayMarker(positions[i].latlng,message);
 }
 
@@ -38,10 +38,11 @@ if(navigator.geolocation){
         var lon=position.coords.longitude;
 
         var locPosition=new kakao.maps.LatLng(lat,lon);
-        var message=message = `<div style="padding:5px;">현 위치</div>`;
-
+        var message = `<div style="padding:5px;">현 위치</div>`;
+        
         console.log('현위치 ',locPosition);
         displayMarker(locPosition,message);
+
 
     });
 }else{
@@ -63,4 +64,14 @@ function displayMarker(locPosition, message) {
 
     infowindow.open(map, marker);
     map.setCenter(locPosition);      
+}
+
+// 행정동 주소 정보 가져오기
+function searchAddrFromCoords(coords,callback){
+    geocoder.coord2RegionCode(coords.getLng(),coords.getLat(),callback);
+}
+
+// 법정동 상세 주소 정보 요청
+function searchDetailAddrFromCoords(coords,callback){
+    geocoder.coord2RegionCode(coords.getLng(),coords.getLat(),callback);
 }
