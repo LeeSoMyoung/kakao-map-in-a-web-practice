@@ -78,7 +78,7 @@ function displayMarker(locPosition, message) {
     map.setCenter(locPosition);
 
      ///// 인포 윈도우 이벤트 처리
-   /*  kakao.maps.event.addListener(marker,'click',function(){
+     kakao.maps.event.addListener(marker,'click',function(){
          if(!marker.isOpened){
         console.log('마커 클릭, 인포윈도우가 열립니다.');
         infowindow.open(map, marker);
@@ -88,7 +88,7 @@ function displayMarker(locPosition, message) {
         infowindow.close();
         marker.isOpened=false;
     }
-    });*/
+    });
 
     //// 커스텀 오버레이 이벤트 처리
     kakao.maps.event.addListener(marker,'click',function(){
