@@ -20,10 +20,21 @@ var positions=[
         }
     ]
 for(var i=0;i<positions.length;++i){
-
-    const message='나무를 찾는 대학, 가톨릭대학교';
-    
-    displayMarker(positions[i].latlng,message);
+    var content = '<div class="wrap">' + 
+            '    <div class="info">' + 
+            '        <div class="title">' + 
+            '            장소 설명' + 
+            '            <div class="close" onclick="closeOverlay(overlay)" title="닫기"></div>' + 
+            '        </div>' + 
+            '        <div class="body">' +  
+            '            <div class="desc">' + 
+            '                <div class="catholic university of korea">가톨릭대학교</div>' + 
+            '                <div class="cuk description">나무를 찾는 대학</div>' + 
+            '            </div>' + 
+            '        </div>' + 
+            '    </div>' +    
+            '</div>';
+    displayMarker(positions[i].latlng,content);
 }
 
 getCurrentLocation();
@@ -37,10 +48,22 @@ function getCurrentLocation(){
             const lon=position.coords.longitude;
 
             const locPosition=new kakao.maps.LatLng(lat,lon);
-            const message ='현 위치';
+            const content = '<div class="wrap">' + 
+            '    <div class="info">' + 
+            '        <div class="title">' + 
+            '            방 정보' + 
+            '            <div class="close" onclick="closeOverlay(overlay)" title="닫기"></div>' + 
+            '        </div>' + 
+            '        <div class="body">' +  
+            '            <div class="desc">' + 
+            '                <div class="current_Location">사용자의 현 위치</div>' + 
+            '            </div>' + 
+            '        </div>' + 
+            '    </div>' +    
+            '</div>';
             
             console.log('현위치 ',locPosition);
-            displayMarker(locPosition,message);
+            displayMarker(locPosition,content);
 
         });
     }else{
@@ -49,27 +72,27 @@ function getCurrentLocation(){
     }
 }
 
-function displayMarker(locPosition, message) {
+function displayMarker(locPosition, content) {
     var marker = new kakao.maps.Marker({  
         map: map, 
         position: locPosition,
         clickable:true,
         isOpened: false
     }); 
-    var iwContent = message,
+    var iwContent = content,
         iwRemoveable = true;
 
     var infowindow = new kakao.maps.InfoWindow({
         content : iwContent,
-        removable : iwRemoveable
+        removable : iwRemoveable,
+        clickable: true
     });
 
     //// 커스텀 오버레이
     var overlay=new kakao.maps.CustomOverlay({
         map: map,
         position: locPosition,
-        clickable: true,
-        isOpened: false
+        contnet: iwContent
     });
 
     console.log('overlay',overlay);
@@ -91,17 +114,23 @@ function displayMarker(locPosition, message) {
     });
 
     //// 커스텀 오버레이 이벤트 처리
-    kakao.maps.event.addListener(marker,'click',function(){
-        if(overlay.isOpened){
+    /*kakao.maps.event.addListener(marker,'click',function(){
+        if(marker.isOpened){
             console.log('마커 클릭, 커스텀 오버레이가 닫힙니다.');
-            overlay.setMap(map);
-            overlay.isOpened=false;
+            overlay.setMap(null);
+            marker.isOpened=false;
+            overlay.setVisible(false);
         }else{
             console.log('마커 클릭, 커스텀 오버레이가 열립니다.');
-            overlay.setMap(null);
-            overlay.isOpened=true;
+            overlay.setMap(map);
+            marker.isOpened=true;
+            overlay.setVisible(true);
         }
-    })
+    });*/
+
+    kakao.maps.event.addListener(infowindow,'click',function(){
+        location.href="room.html";
+    });
 }
 
 ///////////////////////
@@ -129,4 +158,8 @@ function goHistoryPage(){
 
 function goChattingPage(){
     //TODO : 채팅목록으로 이동
+}
+
+function closeOverlay(overlay){
+    overlay.close();
 }

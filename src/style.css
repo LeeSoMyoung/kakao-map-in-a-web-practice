@@ -1,6 +1,8 @@
 #map{
     position:relative;
     overflow:hidden;
+    place-content: center;
+    left: 100px;
 }
 .buttons, .buttons *{
     margin:0;
@@ -33,6 +35,8 @@
     margin:0 auto 2px;
     width:22px;
     height:26px;
+    bottom:10px;
+    right: 10px;
     background:url('https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/history.png?alt=media&token=b1fd40b1-405d-44a1-bde3-3bf257c39bc2');
 } 
 .buttons .currentLocation {
@@ -50,4 +54,13 @@
     height:26px;
     background:url('https://firebasestorage.googleapis.com/v0/b/tauu-34869.appspot.com/o/chatting.png?alt=media&token=fb136268-3732-4f7c-806a-e2a518beeb53');
     background-position:-10px -36px;
-}   
+}
+.info .title{
+    font-weight: bold;
+    text-align: cneter;
+}
+.body .desc .current_Location{
+    color:#3498db;
+    font-weight: normal;
+    text-align: center;
+}
